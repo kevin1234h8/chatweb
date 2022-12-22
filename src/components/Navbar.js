@@ -44,7 +44,7 @@ const Navbar = ({ user }) => {
         </div>
         <Link to="/signup" className="text-white no-underline">
           {user ? (
-            <div>{user.username?.split("")[0] ?? [].toUpperCase()}</div>
+            <div>{user.username?.split("")[0].toUpperCase()}</div>
           ) : (
             <button className="px-4 py-2 outline-none rounded-lg  border-[#303032] border">
               Signup
