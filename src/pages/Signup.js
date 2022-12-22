@@ -1,6 +1,7 @@
 import React from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useNavigate } from "react-router-dom";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 const Signup = ({ setUsername, setEmail, setPassword, signUp }) => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -74,11 +75,11 @@ const Signup = ({ setUsername, setEmail, setPassword, signUp }) => {
             Sign up
           </button>
           <div className="text-sm">
-            already signup ?{" "}
+            already signup ?
             <a href="/login" className="no-underline">
               login
-            </a>{" "}
-            to your account{" "}
+            </a>
+            to your account
           </div>
 
           <div className="text-sm">Login with social media</div>

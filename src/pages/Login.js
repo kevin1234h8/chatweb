@@ -114,7 +114,7 @@ const Login = ({
           </button>
 
           <div className="text-sm">
-            Login with social media ,{" "}
+            Login with social media ,
             <a href="/" className="no-underline text-blue-500">
               go back to home
             </a>

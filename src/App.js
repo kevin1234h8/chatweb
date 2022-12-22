@@ -1,5 +1,6 @@
 import "./App.css";
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
@@ -32,6 +33,7 @@ function App() {
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState("");
   const [onlineUsers, setOnlineUsers] = useState(null);
+  const navigate = useNavigate();
   const socket = useRef();
 
   useEffect(() => {
@@ -69,7 +71,11 @@ function App() {
       },
       { withCredentials: true }
     );
+    if (res.status === 200) {
+      navigate("/login");
+    }
   };
+
   useEffect(() => {
     localStorage.setItem("User", JSON.stringify(user));
   }, [user]);
