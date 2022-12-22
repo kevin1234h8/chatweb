@@ -17,7 +17,9 @@ import { io } from "socket.io-client";
 
 function App() {
   const [user, setUser] = useState(
-    localStorage.getItem("User") ? JSON.parse(localStorage.getItem("User")) : []
+    localStorage.getItem("User")
+      ? JSON.parse(localStorage.getItem("User"))
+      : null
   );
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -53,7 +55,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    socket.current.emit("addUser", user._id);
+    socket.current.emit("addUser", user?._id);
     socket.current.on("getUsers", (data) => setOnlineUsers(data));
   }, [user]);
 
