@@ -61,7 +61,7 @@ function App() {
 
   const signUp = async () => {
     const res = await axios.post(
-      "http://localhost:5000/users/create",
+      "https://chatwebserver.vercel.app/users/create",
       {
         username,
         email,
@@ -77,7 +77,7 @@ function App() {
   useEffect(() => {
     const getConversations = async () => {
       const res = await axios.get(
-        `http://localhost:5000/conversations/${user?._id}`,
+        `https://chatwebserver.vercel.app/conversations/${user?._id}`,
         {
           withCredentials: true,
         }
@@ -93,7 +93,7 @@ function App() {
     const getMessages = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/messages/${currentChat?._id}`,
+          `https://chatwebserver.vercel.app/messages/${currentChat?._id}`,
           { withCredentials: true }
         );
         setMessages(res.data);
@@ -124,7 +124,7 @@ function App() {
 
     if (newMessage !== "") {
       const res = await axios.post(
-        "http://localhost:5000/messages/create",
+        "https://chatwebserver.vercel.app/messages/create",
         message,
         { withCredentials: true }
       );

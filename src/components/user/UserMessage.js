@@ -17,9 +17,12 @@ const UserMessage = ({
       );
 
       const getUserFriend = async () => {
-        const res = await axios.get(`http://localhost:5000/users/${friendId}`, {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `https://chatwebserver.vercel.app/users/${friendId}`,
+          {
+            withCredentials: true,
+          }
+        );
         setUserFriend(res.data);
       };
       getUserFriend();

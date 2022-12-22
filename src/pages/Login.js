@@ -22,7 +22,7 @@ const Login = ({
 
   const login = async () => {
     const res = await axios.post(
-      "http://localhost:5000/login",
+      "https://chatwebserver.vercel.app/login",
       {
         username: loginUsername,
         password: loginPassword,
