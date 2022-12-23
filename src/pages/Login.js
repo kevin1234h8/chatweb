@@ -29,7 +29,6 @@ const Login = ({
       },
       { withCredentials: true }
     );
-    console.log(res.data.data);
     if (res.status === 200) {
       navigate("/");
       setUser(res.data.data);

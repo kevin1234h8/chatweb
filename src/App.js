@@ -1,6 +1,5 @@
 import "./App.css";
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
@@ -33,7 +32,6 @@ function App() {
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState("");
   const [onlineUsers, setOnlineUsers] = useState(null);
-  const navigate = useNavigate();
   const socket = useRef();
 
   useEffect(() => {
@@ -60,21 +58,6 @@ function App() {
     socket.current.emit("addUser", user?._id);
     socket.current.on("getUsers", (data) => setOnlineUsers(data));
   }, [user]);
-
-  const signUp = async () => {
-    const res = await axios.post(
-      "https://chatwebserver.vercel.app/users/create",
-      {
-        username,
-        email,
-        password,
-      },
-      { withCredentials: true }
-    );
-    if (res.status === 200) {
-      navigate("/login");
-    }
-  };
 
   useEffect(() => {
     localStorage.setItem("User", JSON.stringify(user));
@@ -183,7 +166,9 @@ function App() {
                   setUsername={setUsername}
                   setEmail={setEmail}
                   setPassword={setPassword}
-                  signUp={signUp}
+                  username={username}
+                  email={email}
+                  password={password}
                 />
               )
             }

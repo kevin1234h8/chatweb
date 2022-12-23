@@ -3,7 +3,29 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
-const Signup = ({ setUsername, setEmail, setPassword, signUp }) => {
+const Signup = ({
+  setUsername,
+  setEmail,
+  setPassword,
+  username,
+  email,
+  password,
+}) => {
+  const signUp = async () => {
+    const navigate = useNavigate();
+    const res = await axios.post(
+      "https://chatwebserver.vercel.app/users/create",
+      {
+        username,
+        email,
+        password,
+      },
+      { withCredentials: true }
+    );
+    if (res.status === 200) {
+      navigate("/login");
+    }
+  };
   const [showPassword, setShowPassword] = React.useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
