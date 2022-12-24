@@ -104,6 +104,7 @@ const Signup = ({
                     className="outline-none w-full border-2 px-4 py-2 rounded-lg peer required:border-red-500 valid:border-green-500"
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,20}$"
                   />{" "}
                   <div className="text-red-500 hidden peer-invalid:block">
                     Password must be atleast 8 - 20 character and contain one

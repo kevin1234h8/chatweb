@@ -21,9 +21,7 @@ const Navbar = ({ user }) => {
       </div>
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-4 border-[#303032] border px-4 py-2 rounded-lg ">
-          <div>Priyanto</div>
           <div className="flex items-center gap-2">
-            <div>00:34</div>
             <i className="fa-solid fa-phone bg-red-500 p-2 rounded-full"></i>
           </div>
         </div>
