@@ -62,38 +62,62 @@ const Login = ({
             <div className="text-4xl font-bold">Login</div>
             <div className="text-sm">Please fill your information below</div>
           </div>
-          <form action="" className="flex flex-col gap-4">
-            <div className="flex items-center gap-4 border-b border-gray-500 py-4 justify-between">
-              <label htmlFor="name" className="w-24">
+          <form action="" className="flex flex-col gap-4 w-96">
+            <div className="flex items-center gap-4 border-b border-gray-500 py-4 justify-between ">
+              <label htmlFor="username" className="w-24">
                 Username
               </label>
-              <input
-                minLength={2}
-                maxLength={12}
-                id="name"
-                type="text"
-                className="outline-none  w-full"
-                onChange={(e) => setLoginUsername(e.target.value)}
-              />
+              <div className="w-full">
+                <input
+                  minLength={2}
+                  maxLength={12}
+                  id="username"
+                  name="username"
+                  type="text"
+                  pattern="^[A-Za-z0-9]{3,16}$"
+                  className="outline-none border-2 px-4 rounded-lg py-2 w-full peer required:border-red-500 valid:border-green-500"
+                  placeholder="Username"
+                  onChange={(e) => setLoginUsername(e.target.value)}
+                  required
+                />
+                <div className="text-red-500 hidden peer-invalid:block">
+                  Username must be at 3 - 16 character and not contain a special
+                  character
+                </div>
+              </div>
             </div>
             <div className="flex items-center gap-4 border-b border-gray-500 py-4 justify-between">
               <label htmlFor="password" className="w-24">
                 Password
               </label>
-              <div className="flex items-center w-full">
-                <input
-                  minLength={8}
-                  maxLength={20}
-                  required
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  className="outline-none w-full valid:border-red-500"
-                  onChange={(e) => setLoginPassword(e.target.value)}
-                />
+
+              <div className="flex items-center relative w-96">
+                <div className="w-full">
+                  <input
+                    minLength={8}
+                    maxLength={20}
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    className="outline-none w-full border-2 px-4 py-2 rounded-lg peer required:border-red-500 valid:border-green-500"
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    required
+                    pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,20}$"
+                  />{" "}
+                  <div className="text-red-500 hidden peer-invalid:block">
+                    Password must be atleast 8 - 20 character and contain one
+                    number and one specials character
+                  </div>
+                </div>
                 {showPassword ? (
-                  <VisibilityIcon onClick={handleShowPassword} />
+                  <VisibilityIcon
+                    className="absolute right-2 top-3"
+                    onClick={handleShowPassword}
+                  />
                 ) : (
-                  <VisibilityOffIcon onClick={handleShowPassword} />
+                  <VisibilityOffIcon
+                    className="absolute right-2 top-3"
+                    onClick={handleShowPassword}
+                  />
                 )}
               </div>
             </div>
