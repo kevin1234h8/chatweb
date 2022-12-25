@@ -2,8 +2,6 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 
 const UserMessage = ({
-  message,
-  time,
   conversation,
   currentUserId,
   userFriend,
@@ -29,11 +27,10 @@ const UserMessage = ({
       getUserFriend();
 
       return () => {
-        console.log("effect");
         effectRun.current = true;
       };
     }
-  }, [currentUserId, conversation]);
+  }, [currentUserId, conversation, setUserFriend]);
 
   return (
     <button className="flex items-center gap-2 justify-between hover:bg-orange-100 p-2 w-full focus:bg-orange-100 rounded-lg">
@@ -44,10 +41,8 @@ const UserMessage = ({
             {userFriends?.username?.charAt(0).toUpperCase() +
               userFriends?.username?.slice(1)}
           </div>
-          <div>{message}</div>
         </div>
       </div>
-      <div className="text-sm">{time}</div>
     </button>
   );
 };

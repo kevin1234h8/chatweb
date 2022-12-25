@@ -3,6 +3,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Divider } from "@mui/material";
 const Signup = ({
   setUsername,
   setEmail,
@@ -38,7 +39,9 @@ const Signup = ({
       <div className="grid grid-cols-1  bg-white gap-4 rounded-lg lg:grid-cols-2">
         <div className="w-full p-8 flex flex-col gap-8">
           <div className="flex flex-col gap-3">
-            <div className="text-4xl font-bold text-center ">Sign Up</div>
+            <div className="text-xl font-bold text-center  md:text-2xl lg:text-4xl">
+              Sign Up
+            </div>
             <div className="text-sm text-center ">
               Please fill your information below
             </div>
@@ -132,22 +135,23 @@ const Signup = ({
             </div>
             <button
               onClick={signUp}
-              className="px-4 w-32 py-2 rounded-lg outline-none bg-black text-white"
+              className="px-4 w-full py-2 rounded-lg outline-none bg-black text-white"
             >
               Sign up
             </button>
           </form>
 
-          <div className="text-sm">
-            already signup ?{" "}
+          <div className="text-sm text-center">
+            Already a user ?{" "}
             <a href="/login" className="no-underline">
-              login{" "}
+              LOGIN{" "}
             </a>
-            to your account
           </div>
 
-          <div className="text-sm">Login with social media</div>
-          <div className="flex items-center gap-2">
+          <Divider>OR</Divider>
+
+          <div className="text-sm text-center">Sign with social media</div>
+          <div className="flex items-center gap-2 justify-center">
             <i className="fab fa-facebook text-xl text-blue-500"></i>
             <i className="fab fa-google text-xl text-red-500"></i>
             <i className="fab fa-github text-xl"></i>

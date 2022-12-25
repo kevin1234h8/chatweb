@@ -17,6 +17,7 @@ const Home = ({
   onlineUsers,
   online,
   user,
+  setConversations,
 }) => {
   const [userFriend, setUserFriend] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -29,6 +30,7 @@ const Home = ({
   const handleOpenSidebar = () => {
     setOpen(!open);
   };
+
   return (
     <div>
       <Navbar
@@ -90,7 +92,11 @@ const Home = ({
         </div>
       </div>
       {isOpenModal ? (
-        <Modal setIsOpenModal={setIsOpenModal} text={"Add Contact"} />
+        <Modal
+          setIsOpenModal={setIsOpenModal}
+          user={user}
+          setConversation={setConversations}
+        />
       ) : null}
       <Drawer
         currentUserId={currentUserId}

@@ -4,6 +4,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Divider } from "@mui/material";
 const Login = ({
   loginUsername,
   setLoginUsername,
@@ -24,7 +25,7 @@ const Login = ({
     const res = await axios.post(
       "https://chatwebserver.vercel.app/login",
       {
-        username: loginUsername,
+        username: loginUsername?.toLowerCase(),
         password: loginPassword,
       },
       { withCredentials: true }
@@ -59,12 +60,16 @@ const Login = ({
         </div>
         <div className="w-full p-8 flex flex-col gap-8">
           <div className="flex flex-col gap-3">
-            <div className="text-4xl font-bold">Login</div>
-            <div className="text-sm">Please fill your information below</div>
+            <div className="text-center text-xl font-bold md:text-2xl lg:text-4xl">
+              Login
+            </div>
+            <div className="text-center text-sm">
+              Please fill your information below
+            </div>
           </div>
           <form action="" className="flex flex-col gap-4 w-96">
             <div className="flex items-center gap-4 border-b border-gray-500 py-4 justify-between ">
-              <label htmlFor="username" className="w-24">
+              <label htmlFor="username" className="w-24 text-sm md:text-md ">
                 Username
               </label>
               <div className="w-full">
@@ -80,13 +85,13 @@ const Login = ({
                   onChange={(e) => setLoginUsername(e.target.value)}
                   required
                 />
-                <div className="text-red-500 hidden peer-invalid:block">
+                <div className="text-red-500 hidden text-sm md:text-md  peer-invalid:block ">
                   Username must be at 3 - 16 character and not contain a special
                   character
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-4 border-b border-gray-500 py-4 justify-between">
+            <div className="flex items-center gap-4 border-b border-gray-500 py-4 justify-between text-sm md:text-md ">
               <label htmlFor="password" className="w-24">
                 Password
               </label>
@@ -98,12 +103,12 @@ const Login = ({
                     maxLength={20}
                     id="password"
                     type={showPassword ? "text" : "password"}
-                    className="outline-none w-full border-2 px-4 py-2 rounded-lg peer required:border-red-500 valid:border-green-500"
+                    className="outline-none w-full border-2 px-4 py-2 rounded-lg text-sm md:text-md peer required:border-red-500 valid:border-green-500"
                     onChange={(e) => setLoginPassword(e.target.value)}
                     required
                     pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,20}$"
                   />{" "}
-                  <div className="text-red-500 hidden peer-invalid:block">
+                  <div className="text-red-500 hidden text-sm md:text-md  peer-invalid:block">
                     Password must be atleast 8 - 20 character and contain one
                     number and one specials character
                   </div>
@@ -122,30 +127,35 @@ const Login = ({
               </div>
             </div>
           </form>
-          {error ? <div>wrong username and password combination</div> : null}
-          <div className="flex items-center gap-4 my-4">
-            <input type="radio" />
-            <label htmlFor="">
-              I agree <span>terms and conditions</span> & privacy policy
-            </label>
-          </div>
+          <div className="text-black">{error}</div>
+
           <button
             onClick={login}
-            className="px-4 w-32 py-2 rounded-lg outline-none bg-black text-white"
+            className="px-4  w-full py-2 rounded-lg outline-none bg-black text-white"
           >
             Login
           </button>
 
-          <div className="text-sm">
+          <Divider>OR</Divider>
+
+          <div className="text-sm text-center">
             Login with social media ,
             <a href="/" className="no-underline text-blue-500">
               go back to home
             </a>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 justify-center">
             <i className="fab fa-facebook text-xl text-blue-500"></i>
             <i className="fab fa-google text-xl text-red-500"></i>
             <i className="fab fa-github text-xl"></i>
+          </div>
+          <div className="text-sm text-center">
+            Need an account ?{" "}
+            <span className="text-blue-500">
+              <a href="/signup" className="no-underline">
+                SIGN UP
+              </a>
+            </span>
           </div>
         </div>
       </div>

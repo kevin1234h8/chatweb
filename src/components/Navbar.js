@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { Badge } from "@mui/material";
-import Modal from "./Modal";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const Navbar = ({ user, handleOpenDrawer }) => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -10,7 +10,9 @@ const Navbar = ({ user, handleOpenDrawer }) => {
   const handleOpenMenu = () => {
     setOpenMenu(!openMenu);
   };
-
+  const notify = () => {
+    toast(`${user._id}`);
+  };
   return (
     <div>
       <div className=" md:sticky top-0 flex items-center justify-between px-4 py-2 text-white bg-[#0f0f11] z-10">
@@ -19,6 +21,16 @@ const Navbar = ({ user, handleOpenDrawer }) => {
           <div onClick={handleOpenDrawer}>Chat</div>
         </div>
         <div className="flex items-center gap-3 md:hidden">
+          <div>
+            <button onClick={notify}>
+              <div className="relative p-0.5 inline-flex items-center justify-center font-bold overflow-hidden group rounded-md">
+                <span className="w-full h-full bg-gradient-to-br from-[#ff8a05] via-[#ff5478] to-[#ff00c6] group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
+                <span className="relative px-6 py-3 transition-all ease-out bg-gray-900 rounded-md group-hover:bg-opacity-0 duration-400">
+                  <span className="relative text-white">Get your id</span>
+                </span>
+              </div>
+            </button>
+          </div>
           <Badge color="primary" variant="dot" overlap="circular">
             <NotificationsNoneOutlinedIcon />
           </Badge>
@@ -47,6 +59,16 @@ const Navbar = ({ user, handleOpenDrawer }) => {
           />
         </div>
         <div className="hidden  items-center gap-4 md:flex">
+          <div>
+            <button onClick={notify}>
+              <div className="relative p-0.5 inline-flex items-center justify-center font-bold overflow-hidden group rounded-md">
+                <span className="w-full h-full bg-gradient-to-br from-[#ff8a05] via-[#ff5478] to-[#ff00c6] group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
+                <span className="relative px-6 py-3 transition-all ease-out bg-gray-900 rounded-md group-hover:bg-opacity-0 duration-400">
+                  <span className="relative text-white">Get your id</span>
+                </span>
+              </div>
+            </button>
+          </div>
           <div className="flex items-center gap-4 border-[#303032] border px-4 py-2 rounded-lg ">
             <div className="flex items-center gap-2">
               <i className="fa-solid fa-phone bg-red-500 p-2 rounded-full"></i>
@@ -95,6 +117,18 @@ const Navbar = ({ user, handleOpenDrawer }) => {
           </div>
         </div>
       ) : null}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

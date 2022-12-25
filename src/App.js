@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useEffect, useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import "react-toastify/dist/ReactToastify.css";
 import {
   BrowserRouter as Router,
   Navigate,
@@ -140,6 +140,7 @@ function App() {
                 handleSendMessage={handleSendMessage}
                 newMessage={newMessage}
                 onlineUsers={onlineUsers}
+                setConversations={setConversations}
               />
             }
           />
