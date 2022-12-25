@@ -37,9 +37,12 @@ const UserMessage = ({
   return (
     <button className="flex items-center gap-2 justify-between hover:bg-orange-100 p-2 w-full focus:bg-orange-100 rounded-lg">
       <div className="flex items-center gap-2">
-        <i className="fa-solid fa-user p-3 bg-orange-500 text-white rounded-full"></i>
+        <i className="fa-solid fa-user p-2  bg-orange-500 text-white rounded-full lg:p-3"></i>
         <div className="flex flex-col">
-          <div className="font-semibold text-xl">{userFriend?.username}</div>
+          <div className="font-semibold text-md lg:text-xl">
+            {userFriend?.username?.charAt(0).toUpperCase() +
+              userFriend?.username?.slice(1)}
+          </div>
           <div>{message}</div>
         </div>
       </div>

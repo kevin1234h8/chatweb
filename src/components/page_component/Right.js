@@ -45,9 +45,9 @@ const Right = ({
           )}
         </div>
       </div>
-      <div className="sticky bottom-10 flex items-center gap-2 justify-between">
-        <div className=" bg-white rounded-lg px-4 py-2 flex items-center gap-4 w-full">
-          <div>
+      <div className="sticky bottom-0 md:bottom-10 flex items-center gap-2 justify-between">
+        <div className=" bg-white rounded-lg px-4 py-2 flex items-center  w-full lg:gap-4">
+          <div className="hidden lg:block">
             <EmojiEmotionsOutlinedIcon />
           </div>
           <input
@@ -67,7 +67,7 @@ const Right = ({
             <i className="fa fa-send"></i>
           </button>
         </div>
-        <i className="fa-solid fa-phone bg-blue-400 p-3 text-white rounded-full"></i>
+        <i className="fa-solid fa-phone bg-blue-400 p-2 text-white rounded-full lg:p-3"></i>
       </div>
     </div>
   );

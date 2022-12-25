@@ -23,8 +23,8 @@ const User = ({ name, conversation, currentUserId, open }) => {
   return (
     <div className="flex items-center gap-2">
       <i className="fa-solid fa-user p-3 bg-orange-500 text-white rounded-full"></i>
-      <div className={` ${open ? "scale-100" : "scale-0"}`}>
-        {user?.username}
+      <div className={`hidden lg:block ${open ? "scale-100" : "scale-0"}`}>
+        {user?.username?.charAt(0).toUpperCase() + user.username?.slice(1)}
       </div>
     </div>
   );

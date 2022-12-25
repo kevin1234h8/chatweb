@@ -12,13 +12,13 @@ const Message = ({ you, message }) => {
       >
         <div>
           <div
-            className={`p-2 rounded-lg w-auto max-w-sm break-words  ${
+            className={`p-2 rounded-lg w-auto max-w-sm break-words text-sm  ${
               you ? "bg-blue-500 text-white text-right" : "bg-white text-black"
-            }`}
+            } md:text-md`}
           >
             {message.text}
           </div>
-          <div className="flex text-sm justify-end">
+          <div className="flex text-xs justify-end">
             {format(message.createdAt)}
           </div>
         </div>

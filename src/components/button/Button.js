@@ -12,7 +12,9 @@ const Button = ({ text, setIsOpenModal, isOpenModal, open }) => {
         }`}
       >
         <i className="fa-solid fa-plus"></i>
-        <div className={`${open ? "visible" : "hidden"}`}>{text}</div>
+        <div className={`hidden lg:block ${open ? "lg:visible" : "lg:hidden"}`}>
+          {text}
+        </div>
       </div>
     </button>
   );

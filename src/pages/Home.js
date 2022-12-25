@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Center from "../components/page_component/Center";
 import Right from "../components/page_component/Right";
 import Sidebar from "../components/page_component/Sidebar";
-
+import Drawer from "../components/Drawer";
 const Home = ({
   currentUserId,
   setCurrentChat,
@@ -21,26 +21,36 @@ const Home = ({
   const [userFriend, setUserFriend] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [open, setOpen] = useState(true);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const handleOpenDrawer = () => {
+    setOpenDrawer(true);
+  };
+  console.log(openDrawer);
   const handleOpenSidebar = () => {
     setOpen(!open);
   };
   return (
     <div>
-      <Navbar user={user} />
-      <div className="flex min-h-screen">
+      <Navbar
+        user={user}
+        openDrawer={openDrawer}
+        setOpenDrawer={setOpenDrawer}
+        handleOpenDrawer={handleOpenDrawer}
+      />
+      <div className="w-full flex min-h-screen">
         <div
-          className={`relative p-4 h-full ${
-            open ? "w-1/6 " : "w-24"
-          } duration-500 ease-in-out `}
+          className={`hidden relative p-4 h-full w-24  ${
+            open ? "lg:w-1/6 " : "lg:w-24"
+          } duration-500 ease-in-out md:block`}
         >
           <div
             onClick={handleOpenSidebar}
             className="absolute right-[-10px] top-44 bg-white rounded-lg "
           >
             {open ? (
-              <i className="far fa-arrow-alt-circle-right text-2xl"></i>
+              <i className=" hidden far fa-arrow-alt-circle-right text-2xl lg:block"></i>
             ) : (
-              <i className="far fa-arrow-alt-circle-left text-2xl"></i>
+              <i className="hidden far fa-arrow-alt-circle-left text-2xl lg:block"></i>
             )}
           </div>
           <Sidebar
@@ -52,8 +62,8 @@ const Home = ({
             checkOnlineStatus={checkOnlineStatus}
           />
         </div>
-        <div className="w-5/6 bg-[#f9f3ee] flex p-4 gap-4 ">
-          <div className="w-1/2 bg-white px-4">
+        <div className=" w-full bg-[#f9f3ee] flex p-4 gap-4 md:w-6/6">
+          <div className=" hidden bg-white px-4 md:block md:w-1/3">
             <Center
               currentUserId={currentUserId}
               setCurrentChat={setCurrentChat}
@@ -61,9 +71,10 @@ const Home = ({
               online={online}
               userFriend={userFriend}
               setUserFriend={setUserFriend}
+              setOpenDrawer={setOpenDrawer}
             />
           </div>
-          <div className="w-1/2 px-4">
+          <div className="w-full  md:block md:w-2/3 md:px-4">
             <Right
               currentChat={currentChat}
               messages={messages}
@@ -81,6 +92,19 @@ const Home = ({
       {isOpenModal ? (
         <Modal setIsOpenModal={setIsOpenModal} text={"Add Contact"} />
       ) : null}
+      <Drawer
+        currentUserId={currentUserId}
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+        setCurrentChat={setCurrentChat}
+        onlineUsers={onlineUsers}
+        online={online}
+        userFriend={userFriend}
+        setUserFriend={setUserFriend}
+        setOpenDrawer={setOpenDrawer}
+        center={<Center />}
+        openDrawer={openDrawer}
+      />
     </div>
   );
 };
