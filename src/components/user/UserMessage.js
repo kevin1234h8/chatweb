@@ -9,6 +9,7 @@ const UserMessage = ({
   userFriend,
   setUserFriend,
 }) => {
+  const [userFriends, setUserFriends] = useState([]);
   const effectRun = useRef(false);
   useEffect(() => {
     if (effectRun.current === false) {
@@ -23,7 +24,7 @@ const UserMessage = ({
             withCredentials: true,
           }
         );
-        setUserFriend(res.data);
+        setUserFriends(res.data);
       };
       getUserFriend();
 
@@ -40,8 +41,8 @@ const UserMessage = ({
         <i className="fa-solid fa-user p-2  bg-orange-500 text-white rounded-full lg:p-3"></i>
         <div className="flex flex-col">
           <div className="font-semibold text-md lg:text-xl">
-            {userFriend?.username?.charAt(0).toUpperCase() +
-              userFriend?.username?.slice(1)}
+            {userFriends?.username?.charAt(0).toUpperCase() +
+              userFriends?.username?.slice(1)}
           </div>
           <div>{message}</div>
         </div>

@@ -44,7 +44,7 @@ function App() {
   }, [arrivalMessage]);
 
   useEffect(() => {
-    socket.current = io("https://chatsocket-gold.vercel.app");
+    socket.current = io("http://localhost:8900");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,

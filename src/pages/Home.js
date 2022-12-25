@@ -18,14 +18,14 @@ const Home = ({
   online,
   user,
 }) => {
-  const [userFriend, setUserFriend] = useState(null);
+  const [userFriend, setUserFriend] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [open, setOpen] = useState(true);
   const [openDrawer, setOpenDrawer] = useState(false);
   const handleOpenDrawer = () => {
     setOpenDrawer(true);
   };
-  console.log(openDrawer);
+  console.log(userFriend);
   const handleOpenSidebar = () => {
     setOpen(!open);
   };
