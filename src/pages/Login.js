@@ -80,7 +80,7 @@ const Login = ({
                   name="username"
                   type="text"
                   pattern="^[A-Za-z0-9]{3,16}$"
-                  className="outline-none border-2 px-4 rounded-lg py-2 w-full peer required:border-red-500 valid:border-green-500"
+                  className="outline-none  border-2 px-4 rounded-lg py-2 w-full peer required:border-red-500 valid:border-green-500 "
                   placeholder="Username"
                   onChange={(e) => setLoginUsername(e.target.value)}
                   required

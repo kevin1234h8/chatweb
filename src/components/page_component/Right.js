@@ -14,6 +14,7 @@ const Right = ({
   newMessage,
   userFriend,
   setUserFriend,
+  user,
 }) => {
   const scrollRef = useRef();
 
@@ -24,7 +25,12 @@ const Right = ({
   return (
     <div className="flex flex-col justify-between h-full">
       <div>
-        <UserSelected userFriend={userFriend} setUserFriend={setUserFriend} />
+        <UserSelected
+          userFriend={userFriend}
+          setUserFriend={setUserFriend}
+          currentChat={currentChat}
+          currentUserId={currentUserId}
+        />
         <div className="overflow-y-auto p-4 flex flex-col gap-8 max-h-[48rem] ">
           {currentChat ? (
             <div className="flex flex-col gap-8">
@@ -33,6 +39,9 @@ const Right = ({
                   <Message
                     key={index}
                     message={message}
+                    user={user}
+                    currentUserId={currentUserId}
+                    currentChat={currentChat}
                     you={message.sender == currentUserId}
                   />
                 </div>
@@ -59,6 +68,7 @@ const Right = ({
             onKeyPress={(e) => {
               if (e.key === "Enter") {
                 handleSendMessage();
+                setNewMessage("");
               }
             }}
           />

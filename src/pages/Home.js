@@ -20,13 +20,13 @@ const Home = ({
   setConversations,
 }) => {
   const [userFriend, setUserFriend] = useState([]);
+  const [search, setSearch] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [open, setOpen] = useState(true);
   const [openDrawer, setOpenDrawer] = useState(false);
   const handleOpenDrawer = () => {
     setOpenDrawer(true);
   };
-  console.log(userFriend);
   const handleOpenSidebar = () => {
     setOpen(!open);
   };
@@ -38,6 +38,7 @@ const Home = ({
         openDrawer={openDrawer}
         setOpenDrawer={setOpenDrawer}
         handleOpenDrawer={handleOpenDrawer}
+        setSearch={setSearch}
       />
       <div className="w-full flex min-h-screen">
         <div
@@ -74,6 +75,7 @@ const Home = ({
               userFriend={userFriend}
               setUserFriend={setUserFriend}
               setOpenDrawer={setOpenDrawer}
+              user={user}
             />
           </div>
           <div className="w-full  md:block md:w-2/3 md:px-4">
@@ -87,6 +89,8 @@ const Home = ({
               checkOnlineStatus={checkOnlineStatus}
               userFriend={userFriend}
               setUserFriend={setUserFriend}
+              user={user}
+              search={search}
             />
           </div>
         </div>

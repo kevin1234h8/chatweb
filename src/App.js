@@ -23,15 +23,17 @@ function App() {
   );
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [file, setFile] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [conversations, setConversations] = useState([]);
-  const [currentChat, setCurrentChat] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState("");
   const [onlineUsers, setOnlineUsers] = useState(null);
+
   const socket = useRef();
 
   useEffect(() => {
@@ -170,6 +172,8 @@ function App() {
                   username={username}
                   email={email}
                   password={password}
+                  setFile={setFile}
+                  file={file}
                 />
               )
             }

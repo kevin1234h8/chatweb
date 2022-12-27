@@ -1,14 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-
-const UserMessage = ({
-  conversation,
-  currentUserId,
-  userFriend,
-  setUserFriend,
-}) => {
+import { Image } from "cloudinary-react";
+const UserMessage = ({ conversation, currentUserId }) => {
   const [userFriends, setUserFriends] = useState([]);
   const effectRun = useRef(false);
+
   useEffect(() => {
     if (effectRun.current === false) {
       const friendId = conversation.members.find(
@@ -30,12 +26,20 @@ const UserMessage = ({
         effectRun.current = true;
       };
     }
-  }, [currentUserId, conversation, setUserFriend]);
+  }, [currentUserId, conversation]);
 
   return (
     <button className="flex items-center gap-2 justify-between hover:bg-orange-100 p-2 w-full focus:bg-orange-100 rounded-lg">
       <div className="flex items-center gap-2">
-        <i className="fa-solid fa-user p-2  bg-orange-500 text-white rounded-full lg:p-3"></i>
+        {userFriends?.avatar ? (
+          <Image
+            cloudName="deszjgxlm"
+            publicId={userFriends?.avatar}
+            className="w-12 h-12 object-cover rounded-full"
+          />
+        ) : (
+          <i className="fa-solid fa-user p-3 bg-orange-500 text-white rounded-full "></i>
+        )}
         <div className="flex flex-col">
           <div className="font-semibold text-md lg:text-xl">
             {userFriends?.username?.charAt(0).toUpperCase() +

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-
-const User = ({ name, conversation, currentUserId, open }) => {
+import { Image } from "cloudinary-react";
+const User = ({ conversation, currentUserId, open }) => {
   const [user, setUser] = React.useState([]);
   useEffect(() => {
     const friendId = conversation.members.find(
@@ -22,7 +22,16 @@ const User = ({ name, conversation, currentUserId, open }) => {
 
   return (
     <div className="flex items-center gap-2">
-      <i className="fa-solid fa-user p-3 bg-orange-500 text-white rounded-full"></i>
+      {user?.avatar ? (
+        <Image
+          cloudName="deszjgxlm"
+          publicId={user?.avatar}
+          className="w-12 h-12 object-cover rounded-full"
+        />
+      ) : (
+        <i className="fa-solid fa-user p-3 bg-orange-500 text-white rounded-full"></i>
+      )}
+
       <div className={`hidden lg:block ${open ? "scale-100" : "scale-0"}`}>
         {user?.username?.charAt(0).toUpperCase() + user.username?.slice(1)}
       </div>

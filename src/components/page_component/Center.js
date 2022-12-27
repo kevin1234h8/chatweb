@@ -1,11 +1,8 @@
 import React, { useContext, useState } from "react";
 import AddIcCallOutlinedIcon from "@mui/icons-material/AddIcCallOutlined";
 import AddCommentOutlinedIcon from "@mui/icons-material/AddCommentOutlined";
-import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import UserMessage from "../user/UserMessage";
-import UserCall from "../user/UserCall";
 import { ConversationsContext } from "../../utils/ConversationsContext";
-import OnlineUser from "../user/OnlineUser";
 import Button from "../button/Button";
 const Center = ({
   currentUserId,
@@ -17,6 +14,7 @@ const Center = ({
   userFriend,
   setUserFriend,
   setOpenDrawer,
+  search,
 }) => {
   const conversations = useContext(ConversationsContext);
   return (
@@ -54,6 +52,7 @@ const Center = ({
             <UserMessage
               setOpenDrawer={setOpenDrawer}
               user={user}
+              search={search}
               setUser={setUser}
               conversation={conversation}
               currentUserId={currentUserId}
@@ -62,11 +61,7 @@ const Center = ({
             />
           </div>
         ))}
-        <Button
-          isOpenModal={isOpenModal}
-          setIsOpenModal={setIsOpenModal}
-          text="Invite new friend"
-        />
+        <Button isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
       </div>
     </div>
   );

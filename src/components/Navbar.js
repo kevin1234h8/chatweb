@@ -3,8 +3,8 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import { Badge } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-
-const Navbar = ({ user, handleOpenDrawer }) => {
+import { Image } from "cloudinary-react";
+const Navbar = ({ user, handleOpenDrawer, setSearch }) => {
   const [openMenu, setOpenMenu] = useState(false);
 
   const handleOpenMenu = () => {
@@ -13,6 +13,7 @@ const Navbar = ({ user, handleOpenDrawer }) => {
   const notify = () => {
     toast(`${user._id}`);
   };
+
   return (
     <div>
       <div className=" md:sticky top-0 flex items-center justify-between px-4 py-2 text-white bg-[#0f0f11] z-10">
@@ -34,6 +35,22 @@ const Navbar = ({ user, handleOpenDrawer }) => {
           <Badge color="primary" variant="dot" overlap="circular">
             <NotificationsNoneOutlinedIcon />
           </Badge>
+          {user?.avatar ? (
+            <Image
+              cloudName="deszjgxlm"
+              publicId={user?.avatar}
+              className="w-12 h-12 object-cover rounded-full"
+            />
+          ) : (
+            <Badge
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+              color="success"
+              overlap="circular"
+              badgeContent=" "
+            >
+              <i className="fa-solid fa-user p-2 bg-orange-500 text-white rounded-full"></i>
+            </Badge>
+          )}
           <Link to="/signup" className="text-white no-underline">
             {user ? (
               <div>{user.username?.split("")[0].toUpperCase()}</div>
@@ -56,6 +73,7 @@ const Navbar = ({ user, handleOpenDrawer }) => {
             type="text"
             placeholder="search"
             className="outline-none text-white bg-[#28272a] placeholder-white"
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
         <div className="hidden  items-center gap-4 md:flex">
@@ -80,14 +98,22 @@ const Navbar = ({ user, handleOpenDrawer }) => {
             </Badge>
           </div>
           <div>
-            <Badge
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-              color="success"
-              overlap="circular"
-              badgeContent=" "
-            >
-              <i className="fa-solid fa-user p-2 bg-orange-500 text-white rounded-full"></i>
-            </Badge>
+            {user?.avatar ? (
+              <Image
+                cloudName="deszjgxlm"
+                publicId={user?.avatar}
+                className="w-16 h-16 object-cover rounded-full"
+              />
+            ) : (
+              <Badge
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                color="success"
+                overlap="circular"
+                badgeContent=" "
+              >
+                <i className="fa-solid fa-user p-2 bg-orange-500 text-white rounded-full"></i>
+              </Badge>
+            )}
           </div>
           <Link to="/signup" className="text-white no-underline">
             {user ? (

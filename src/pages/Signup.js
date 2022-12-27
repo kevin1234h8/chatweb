@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Divider } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+
 const Signup = ({
   setUsername,
   setEmail,
@@ -11,11 +13,16 @@ const Signup = ({
   username,
   email,
   password,
+  file,
+  setFile,
 }) => {
+  const [avatar, setAvatar] = useState("");
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
   const signUp = async () => {
     const res = await axios.post(
       "https://chatwebserver.vercel.app/users/create",
@@ -23,17 +30,40 @@ const Signup = ({
         username,
         email,
         password,
+        avatar,
       },
       { withCredentials: true }
     );
     if (res.status === 200) {
       navigate("/login");
+      console.log(res);
     }
   };
+
+  const handleUpload = async () => {
+    if (file !== "") {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "dq3qp23d");
+
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/deszjgxlm/image/upload",
+        formData,
+        { withCredentials: true }
+      );
+      if (res.status === 200) {
+        setAvatar(res.data.public_id);
+        return toast("Upload file success");
+      }
+    }
+  };
+
   const [showPassword, setShowPassword] = React.useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  console.log(file);
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 ">
       <div className="grid grid-cols-1  bg-white gap-4 rounded-lg lg:grid-cols-2">
@@ -127,6 +157,68 @@ const Signup = ({
                 )}
               </div>
             </div>
+            <div className="flex flex-col  gap-4 border-b border-gray-500 py-4 justify-between">
+              <label htmlFor="password" className="w-24">
+                Photo
+              </label>
+
+              <div className="flex items-center w-full relative">
+                <div className="w-full flex items-center flex-col gap-4">
+                  <div class="flex items-center justify-center w-full">
+                    <label
+                      for="dropzone-file"
+                      class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800  hover:bg-gray-100 "
+                    >
+                      <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg
+                          aria-hidden="true"
+                          class="w-10 h-10 mb-3 text-black"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                          ></path>
+                        </svg>
+                        <p class="mb-2 text-sm text-black dark:text-gray-400">
+                          <span class="font-semibold">Click to upload</span> or
+                          drag and drop
+                        </p>
+                        <p class="text-xs text-black dark:text-gray-400">
+                          SVG, PNG, JPG or GIF (MAX. 800x400px)
+                        </p>
+                        {file ? <div>File : {file?.name}</div> : null}
+                      </div>
+                      <input
+                        id="dropzone-file"
+                        type="file"
+                        className="hidden"
+                        onChange={(e) => setFile(e.target.files[0])}
+                        required
+                      />
+                    </label>
+                  </div>
+                  <button onClick={handleUpload}>
+                    <div class="relative  items-center justify-center inline-block p-4 px-4 py-2 overflow-hidden font-medium text-indigo-600 rounded-lg shadow-2xl group">
+                      <span class="absolute top-0 left-0 w-40 h-40 -mt-10 -ml-3 transition-all duration-700 bg-red-500 rounded-full blur-md ease"></span>
+                      <span class="absolute inset-0 w-full h-full transition duration-700 group-hover:rotate-180 ease">
+                        <span class="absolute bottom-0 left-0 w-24 h-24 -ml-10 bg-purple-500 rounded-full blur-md"></span>
+                        <span class="absolute bottom-0 right-0 w-24 h-24 -mr-10 bg-pink-500 rounded-full blur-md"></span>
+                      </span>
+                      <span class="relative text-white">Upload</span>
+                    </div>
+                  </button>
+                  <div className="text-red-500 hidden peer-invalid:block">
+                    Choose a photo profile
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="flex items-center gap-4 my-4">
               <input type="radio" className="peer" />
               <label htmlFor="">
@@ -177,6 +269,18 @@ const Signup = ({
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

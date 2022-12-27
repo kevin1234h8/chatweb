@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-const Button = ({ text, setIsOpenModal, isOpenModal, open }) => {
+const Button = ({ setIsOpenModal, isOpenModal, open }) => {
   const handleOpenModal = () => {
     setIsOpenModal(!isOpenModal);
   };
@@ -13,7 +13,7 @@ const Button = ({ text, setIsOpenModal, isOpenModal, open }) => {
       >
         <i className="fa-solid fa-plus"></i>
         <div className={`hidden lg:block ${open ? "lg:visible" : "lg:hidden"}`}>
-          {text}
+          Add new contact
         </div>
       </div>
     </button>

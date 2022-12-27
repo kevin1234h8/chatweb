@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { format } from "timeago.js";
-const Message = ({ you, message }) => {
+import { Image } from "cloudinary-react";
+import axios from "axios";
+const Message = ({ you, message, user, currentChat, currentUserId }) => {
+  const [userFriend, setUserFriend] = useState("");
+  useEffect(() => {
+    const friendId = currentChat.members?.find(
+      (member) => member !== currentUserId
+    );
+
+    const getUserFriend = async () => {
+      const res = await axios.get(
+        `https://chatwebserver.vercel.app/users/${friendId}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      setUserFriend(res.data);
+    };
+    getUserFriend();
+  }, [currentUserId, currentChat]);
   return (
     <div
       className={`flex items-center ${you ? "justify-end" : "justify-start"}`}
@@ -22,7 +42,15 @@ const Message = ({ you, message }) => {
             {format(message.createdAt)}
           </div>
         </div>
-        <i className="fa-solid fa-user p-2 bg-orange-500 text-white rounded-full"></i>
+        {user?.avatar ? (
+          <Image
+            cloudName="deszjgxlm"
+            publicId={you ? user?.avatar : userFriend?.avatar}
+            className="w-12 h-12 object-cover rounded-full"
+          />
+        ) : (
+          <i className="fa-solid fa-user p-2 bg-orange-500 text-white rounded-full lg:p-3"></i>
+        )}
       </div>
     </div>
   );
